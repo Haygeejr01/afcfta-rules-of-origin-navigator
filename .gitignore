@@ -12,4 +12,7 @@ logs/_*.log
 # eval/redaction_rules.example.json ships instead.
 eval/redaction_rules.local.json
 
+# Built from HEAD on demand; never a tracked artifact.
+afcfta-navigator-submission.zip
+
 
