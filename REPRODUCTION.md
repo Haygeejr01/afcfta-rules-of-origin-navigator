@@ -250,10 +250,126 @@ advantage.
 Writes `logs/comparison_results.json` and prints a per-manifest table plus a
 scorecard.
 
+### Reproducing the run twice — which figures survive and which do not
+
+**Do not point `--out` at `logs/comparison_results.json` for a second run.** That is the
+file every published figure in the README cites; overwriting it destroys the evidence for
+the numbers in the documentation. Write somewhere else:
+
+```bash
+python eval/run_comparison.py --reuse-baseline --out logs/comparison_results_run2.json
+```
+
+That is exactly how `logs/comparison_results_run2.json` was produced, and the two files
+together are the reproducibility claim. Check them against each other in one command:
+
+```bash
+python - <<'PY'
+import json
+A = {r["manifest_id"]: r for r in json.load(open("logs/comparison_results.json", encoding="utf-8"))["rows"]}
+B = {r["manifest_id"]: r for r in json.load(open("logs/comparison_results_run2.json", encoding="utf-8"))["rows"]}
+same = sum(A[m]["agent_result"] == B[m]["agent_result"] for m in A)
+print(f"identical agent result payloads: {same}/{len(A)}")
+for m in sorted(A):
+    print(f"  {m}  {A[m]['agent_seconds']:6.1f}s -> {B[m]['agent_seconds']:6.1f}s"
+          f"   ({B[m]['agent_seconds']/A[m]['agent_seconds']:.2f}x)")
+PY
+```
+
+Expected: **`identical agent result payloads: 10/10`**, and every latency slower by
+1.9–2.6×.
+
+| | Run 1 | Run 2 |
+|---|---|---|
+| HS / RVC / verdict / all-three | 9 / 9 / 9 / 8 | **9 / 9 / 9 / 8** |
+| Per-case payloads matching run 1 | — | **10 / 10, byte for byte** |
+| Mean agent seconds per case | 97.7 | **198.3** |
+| Total model calls | 20 | 20 |
+
+**The accuracy is reproducible; the wall-clock is not.** The graded outputs are not merely
+equal in score — the result payloads are byte-identical, which is the behaviour
+`temperature=0`, `format: "json"` and deterministic downstream arithmetic are supposed to
+produce. Latency doubled uniformly across all ten cases with no reordering, which is
+machine load, not workload. Treat any latency number in this repository as an order of
+magnitude measured under one machine state; see CHANGELOG's *"Ran the comparison a second
+time"*, which is the third time this project has had to correct a latency claim and
+explains why the README now prints both columns.
+
 ## 8. Agent trajectories — where the evidence lives
 
-Two systems were run, and both have their full execution recorded. Every claim in
-README.md and CHANGELOG.md traces back to one of these files.
+**Three agents were used, and all three have their execution recorded.** Two run inside
+the product; one built it. They are easy to confuse because both produce files called
+"trajectories", so:
+
+| | The agent | Where its trajectories are |
+|---|---|---|
+| **Built the product** | Claude Code `2.1.250` (Claude Opus 5) | `logs/agent_sessions/` — 2 raw transcripts + a readable rendering of each |
+| **Runs inside the product** | `qwen2.5-coder:7b`, in the `EXTRACT` / `CLASSIFY_HS` / `GENERATE_REPORT` node roles | `logs/trajectories/` — 6 full runs |
+| **The control it is measured against** | the same model, one zero-shot call, no tools | `logs/baseline_results.json` |
+
+`logs/agent_sessions/README.md` is the disclosure document: it names each agent, points
+at the exact file and line holding its instructions, and explains what the digests omit.
+**Start there**, then read `session-01-8701954b.md` — it opens with the operator's full
+role-and-spec prompt and runs through 365 tool calls to the finished repository.
+
+The digests are produced mechanically, and you can regenerate either one:
+
+```bash
+python eval/digest_agent_session.py logs/agent_sessions/session-01-8701954b.jsonl \
+    --out logs/agent_sessions/session-01-8701954b.md
+```
+
+No model summarises anything in them — the same rule this project applies to numbers.
+Counts come straight out of the transcript, so the header is checkable:
+
+```bash
+python -c "import json; L=[json.loads(l) for l in open('logs/agent_sessions/session-01-8701954b.jsonl',encoding='utf-8') if l.strip()]; import collections; print(collections.Counter(e.get('type') for e in L))"
+```
+
+Verify the **16 human instructions** in session 01's header, which is the count that took
+four attempts to get right — the digest's docstring says why:
+
+```bash
+python -c "import sys,json,collections; sys.path.insert(0,'eval'); from digest_agent_session import _blocks,_strip_injected,_SYNTHETIC_MARKERS,_INTERRUPT_MARKER as I; L=[json.loads(l) for l in open('logs/agent_sessions/session-01-8701954b.jsonl',encoding='utf-8') if l.strip()]; t=[' '.join(_strip_injected('\n'.join(b.get('text','') for b in _blocks(e) if b.get('type')=='text')).split()) for e in L if e.get('type')=='user' and not e.get('isMeta') and not any(b.get('type')=='tool_result' for b in _blocks(e))]; t=[x for x in t if x and not x.startswith(I) and not any(m in x for m in _SYNTHETIC_MARKERS)]; d=[x for i,x in enumerate(t) if i==0 or x!=t[i-1]]; print('instructions:',len(d),' adjacent duplicates collapsed:',len(t)-len(d))"
+```
+
+### The transcripts were redacted before publishing, and here is how to check that
+
+The operator's messages over two days included personal remarks, their account handle on
+the host platform, and third-party text they pasted in for context. A declared set of it
+was removed by `eval/redact_agent_session.py` — **73 redactions across 41 entries**, each
+leaving a visible `[redacted: category]` marker. The categories, per-session counts, and
+the list of what was deliberately *left in* are in `logs/agent_sessions/README.md`.
+
+**Nothing technical was removed, and nothing was rewritten.** No message was reworded and
+no instruction invented; the prompts are the operator's real messages. The redaction is
+mechanical and its integrity checks are in the tool, so running it against the shipped
+files is itself the verification — a clean file yields **0 redactions and no surviving
+probe**, because there is nothing left to find:
+
+```bash
+python eval/redact_agent_session.py logs/agent_sessions/session-01-8701954b.jsonl \
+    --out /tmp/check.jsonl --allow-unmatched
+#   operator messages altered: 0
+#     0  TOTAL redactions
+# Verified: no redacted string, pattern, or probe survives; 1,715 entries in, 1,715 out
+```
+
+Drop `--allow-unmatched` and it exits 2 instead, reporting that every rule matched
+nothing — which is the correct complaint about a file that has already been processed,
+and the check that stops a rule from silently rotting as its source changes.
+
+Count the markers in what shipped:
+
+```bash
+python -c "print(sum(open(f,encoding='utf-8').read().count('[redacted: ') for f in ['logs/agent_sessions/session-01-8701954b.jsonl','logs/agent_sessions/session-02-289f5beb.jsonl']))"
+# 73
+```
+
+### The product's own trajectories
+
+Every claim in README.md and CHANGELOG.md about the *product* traces back to one of
+these files.
 
 | File | System | What it contains |
 |---|---|---|
@@ -265,6 +381,7 @@ README.md and CHANGELOG.md traces back to one of these files.
 | `logs/trajectories/M008-20260829-151947.json` | Workflow | The **verification** run for that fix, on a different product. Kept because it shows the fix working *and* failing: the guard fired on a phrasing it had never seen, and let three others through. Its recorded flag count is `1`; the current code finds `4`. See below |
 | `logs/baseline_results.json` | Baseline | All 10 zero-shot calls with the **verbatim `raw_response`**, token counts and latency |
 | `logs/comparison_results.json` | Both | Per-case grading of both systems against ground truth |
+| `logs/comparison_results_run2.json` | Both | An independent second run of the same comparison — see §7 on variance |
 | `logs/comparison_results_contended.json` | Both | A discarded run, kept deliberately — see CHANGELOG "Two eval runs raced each other" |
 
 The first four are the demonstration set, reproducible with the four `--decision`

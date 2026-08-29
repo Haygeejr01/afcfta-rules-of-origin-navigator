@@ -1,0 +1,315 @@
+{
+  "summary": {
+    "model": "qwen2.5-coder:7b",
+    "cases": 10,
+    "rvc_tolerance_pp": 0.5,
+    "baseline": {
+      "hs_correct": 9,
+      "rvc_correct": 0,
+      "status_correct": 5,
+      "fully_correct": 0,
+      "avg_seconds": 37.8,
+      "avg_model_calls": 1.0,
+      "total_model_calls": 10,
+      "estimated_cost_usd": 0.0
+    },
+    "agent": {
+      "hs_correct": 9,
+      "rvc_correct": 9,
+      "status_correct": 9,
+      "fully_correct": 8,
+      "avg_seconds": 198.3,
+      "avg_model_calls": 2.0,
+      "total_model_calls": 20,
+      "estimated_cost_usd": 0.0
+    },
+    "cost_note": "Both systems run locally through Ollama, so marginal API cost is $0.00. The real cost is wall-clock latency and local compute, reported above. The workflow makes more calls per case than the baseline; that is a cost, not a feature.",
+    "human_checkpoint_note": "Accuracy is measured on the automated pipeline up to VERIFY. The mandatory human approval step is not simulated and not credited here; see logs/trajectories for runs that exercise it."
+  },
+  "rows": [
+    {
+      "manifest_id": "M001",
+      "label": "Ghana cocoa \u2014 dark chocolate bars",
+      "ground_truth": "1806.32 / 79.41% / PASS",
+      "baseline_result": "1806.32 / 47.50% / PASS",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "baseline_seconds": 45.3,
+      "baseline_model_calls": 1,
+      "agent_result": "1806.32 / 79.41% / PASS",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 271.1,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 31.9pp; baseline verdict right but underlying number wrong"
+    },
+    {
+      "manifest_id": "M002",
+      "label": "Morocco wiring harness \u2014 extra-regional inputs dominate",
+      "ground_truth": "8544.42 / 11.33% / FAIL",
+      "baseline_result": "8544.42 / 37.00% / FAIL",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "baseline_seconds": 41.6,
+      "baseline_model_calls": 1,
+      "agent_result": "8544.42 / 11.33% / FAIL",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 197.9,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 25.7pp; baseline verdict right but underlying number wrong"
+    },
+    {
+      "manifest_id": "M003",
+      "label": "Kenya knitted cotton T-shirts",
+      "ground_truth": "6109.10 / 79.60% / PASS",
+      "baseline_result": "6109.10 / 42.80% / PASS",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "baseline_seconds": 38.3,
+      "baseline_model_calls": 1,
+      "agent_result": "6109.10 / 79.60% / PASS",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 186.5,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 36.8pp; baseline verdict right but underlying number wrong"
+    },
+    {
+      "manifest_id": "M004",
+      "label": "Nigeria leather handbags \u2014 moderate pass",
+      "ground_truth": "4202.21 / 62.78% / PASS",
+      "baseline_result": "4202.21 / 37.50% / FAIL",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "baseline_seconds": 41.7,
+      "baseline_model_calls": 1,
+      "agent_result": "4202.21 / 62.78% / PASS",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 187.7,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 25.3pp"
+    },
+    {
+      "manifest_id": "M005",
+      "label": "Egypt leather footwear \u2014 BORDERLINE just above threshold",
+      "ground_truth": "6403.99 / 51.00% / BORDERLINE",
+      "baseline_result": "6403.99 / 52.80% / PASS",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "baseline_seconds": 39.1,
+      "baseline_model_calls": 1,
+      "agent_result": "6403.99 / 51.00% / BORDERLINE",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 203.6,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [
+        "Result is inside the +/-2.0pp borderline band; the pass/fail call needs human judgement."
+      ],
+      "notes": "baseline arithmetic off by 1.8pp; baseline called a borderline case a clean PASS"
+    },
+    {
+      "manifest_id": "M006",
+      "label": "South Africa PET bottles \u2014 BORDERLINE just below threshold",
+      "ground_truth": "3923.30 / 34.00% / BORDERLINE",
+      "baseline_result": "3923.30 / 41.86% / PASS",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "baseline_seconds": 34.4,
+      "baseline_model_calls": 1,
+      "agent_result": "3923.30 / 34.00% / BORDERLINE",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 203.8,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [
+        "Result is inside the +/-2.0pp borderline band; the pass/fail call needs human judgement."
+      ],
+      "notes": "baseline arithmetic off by 7.9pp; baseline called a borderline case a clean PASS"
+    },
+    {
+      "manifest_id": "M007",
+      "label": "Rwanda roasted coffee",
+      "ground_truth": "0901.21 / 87.80% / PASS",
+      "baseline_result": "0901.21 / 35.48% / PASS",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "baseline_seconds": 33.8,
+      "baseline_model_calls": 1,
+      "agent_result": "0901.21 / 89.02% / PASS",
+      "agent_correct": "N",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "agent_seconds": 180.4,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 52.3pp; baseline verdict right but underlying number wrong; agent RVC mismatch (got 89.02)"
+    },
+    {
+      "manifest_id": "M008",
+      "label": "Nigeria toilet soap",
+      "ground_truth": "3401.11 / 67.32% / PASS",
+      "baseline_result": "3401.11 / 27.69% / FAIL",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "baseline_seconds": 33.5,
+      "baseline_model_calls": 1,
+      "agent_result": "3401.11 / 67.32% / PASS",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 180.0,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 39.6pp"
+    },
+    {
+      "manifest_id": "M009",
+      "label": "Egypt men's cotton trousers \u2014 cut-and-sew only",
+      "ground_truth": "6203.42 / 10.66% / FAIL",
+      "baseline_result": "6203.42 / 18.57% / FAIL",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": true,
+        "rvc_ok": false,
+        "status_ok": true,
+        "fully_correct": false
+      },
+      "baseline_seconds": 33.4,
+      "baseline_model_calls": 1,
+      "agent_result": "6203.42 / 10.66% / FAIL",
+      "agent_correct": "Y",
+      "agent_grade": {
+        "hs_ok": true,
+        "rvc_ok": true,
+        "status_ok": true,
+        "fully_correct": true
+      },
+      "agent_seconds": 181.1,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline arithmetic off by 7.9pp; baseline verdict right but underlying number wrong"
+    },
+    {
+      "manifest_id": "M010",
+      "label": "South Africa solar PV module \u2014 outside the controlled rule set",
+      "ground_truth": "UNAVAIL / 12.31% / NEEDS_HUMAN_REVIEW",
+      "baseline_result": "8544.42 / 37.00% / FAIL",
+      "baseline_correct": "N",
+      "baseline_grade": {
+        "hs_ok": false,
+        "rvc_ok": false,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "baseline_seconds": 37.1,
+      "baseline_model_calls": 1,
+      "agent_result": "8544.42 / 12.31% / FAIL",
+      "agent_correct": "N",
+      "agent_grade": {
+        "hs_ok": false,
+        "rvc_ok": true,
+        "status_ok": false,
+        "fully_correct": false
+      },
+      "agent_seconds": 191.1,
+      "agent_model_calls": 2,
+      "agent_verification_errors": [],
+      "agent_verification_warnings": [],
+      "notes": "baseline invented 8544.42, a code that does not cover this product; baseline arithmetic off by 24.7pp; agent HS mismatch (got 8544.42)"
+    }
+  ]
+}

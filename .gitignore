@@ -6,4 +6,10 @@ logs/checkpoints/
 logs/_smoke.json
 logs/_*.log
 
+# The real redaction anchors. NEVER commit this: an anchor is a verbatim copy of the
+# sentence it removes, so publishing the rule list would republish, in one convenient
+# place, exactly the content the redaction took out of the transcripts.
+# eval/redaction_rules.example.json ships instead.
+eval/redaction_rules.local.json
+
 

@@ -1,0 +1,70 @@
+{
+  "_note": [
+    "Rule file for eval/redact_agent_session.py.",
+    "",
+    "The real one -- eval/redaction_rules.local.json -- is deliberately NOT committed,",
+    "and this example ships in its place. The reason is the whole point of the tool: a",
+    "rule's anchor is a verbatim copy of the sentence it removes, so a committed rule",
+    "file would republish, in one convenient list, exactly the content the redaction",
+    "took out of the transcripts. The first version of this project did commit the",
+    "anchors inline in the Python source, and a secret scan across the files going",
+    "public is what caught it.",
+    "",
+    "What ships instead is this structure plus the category-by-category counts in",
+    "logs/agent_sessions/README.md, which is what a reader actually needs: how much was",
+    "removed, of what kind, and the assurance that nothing technical was among it.",
+    "",
+    "Anchors below are placeholders. Substitute real ones to use this file.",
+    "",
+    "Fields:",
+    "  redactions[].start     literal text to remove (exact, not a pattern)",
+    "  redactions[].end       remove start..end inclusive; null removes only start",
+    "  redactions[].category  shown in the marker left behind, so keep it truthful",
+    "  regex[].pattern        for content that appears in more than one wording --",
+    "                         compaction summaries paraphrase earlier messages, so an",
+    "                         exact anchor matches the original and misses the restatement",
+    "  probes[]               strings that must not survive anywhere in the output, no",
+    "                         matter which rule was supposed to catch them. Independent of",
+    "                         the rules on purpose: 'is each rule's own anchor gone' is a",
+    "                         circular check and passed every leak this tool ever had",
+    "",
+    "Probe the MIDDLE of a sentence, not its opening. This is the one that got past a",
+    "passing run and into a pushed commit: every probe was the first few words of a",
+    "removed sentence, a compaction summary had quoted one from the middle, and so every",
+    "rule matched, every probe passed, and four fragments shipped anyway. A probe list is",
+    "only as wide as the phrasings it thought to look for. Include interior phrases, and",
+    "when a leak is found, add the phrase that was missed rather than only the rule.",
+    "",
+    "Order matters. A span rule (end set) must come before a bare-anchor rule on the same",
+    "start string, or the bare rule consumes the opening anchor and the span never fires."
+  ],
+
+  "redactions": [
+    {
+      "start": "<a verbatim sentence to remove>",
+      "end": null,
+      "category": "personal remark"
+    },
+    {
+      "start": "<opening line of a pasted block>",
+      "end": "<its closing line>",
+      "category": "pasted third-party evaluation, not an instruction"
+    },
+    {
+      "start": "<opening line of a pasted block>",
+      "end": null,
+      "category": "pasted third-party evaluation, not an instruction"
+    }
+  ],
+
+  "regex": [
+    {
+      "pattern": "<pattern covering a paraphrase-prone remark>[^\"\\n]{0,120}",
+      "category": "personal remark"
+    }
+  ],
+
+  "probes": [
+    "<a distinctive word from the removed content>"
+  ]
+}

@@ -62,7 +62,49 @@ work.
 | `src/graph.py` | State machine + CLI |
 | `src/baseline.py` | Zero-shot control system |
 | `eval/run_comparison.py` | Head-to-head evaluation harness |
+| `eval/digest_agent_session.py` | Renders a coding-agent transcript into a readable trajectory |
+| `eval/redact_agent_session.py` | Removes a declared set of personal content from a transcript before publishing |
 | `tests/` | 129 tests, model-free |
+
+---
+
+## Agent use — disclosure
+
+**Coding agent: [Claude Code](https://claude.com/claude-code) `2.1.250`, model Claude
+Opus 5.** Every file in this repository was written in a session with it. Nothing else
+was used — no second assistant, no code generation service, no copied project.
+
+Its full trajectories are committed, not described: **[`logs/agent_sessions/`](logs/agent_sessions/)**
+holds two raw transcripts plus a readable rendering of each. Between them, **18 human
+instructions and 456 tool calls over 18 hours, 12 of which failed** — including the two
+test failures that drove fixes, and the lost background-task handle that caused the
+contaminated evaluation run documented in CHANGELOG. The digests open with the operator's
+original role-and-spec prompt, reproduced whole, because that prompt is where several of
+the decisions defended in this README come from.
+
+A declared set of the operator's personal remarks and of third-party text they pasted in
+for context was removed before publishing — 73 redactions, each leaving a visible marker,
+with the categories and counts tabulated in
+[`logs/agent_sessions/README.md`](logs/agent_sessions/README.md). **No message was
+reworded and no instruction was invented**; the prompts are the real ones, typos and all,
+and nothing technical was taken out — including a section where the agent scores this
+project against the rubric and says what each criterion loses points for.
+
+**Do not confuse the two kinds of trajectory in this repository.** They have the same
+name and different subjects:
+
+| | The agent | Its trajectories |
+|---|---|---|
+| **Built the product** | Claude Code (Opus 5) | [`logs/agent_sessions/`](logs/agent_sessions/) |
+| **Runs inside the product** | `qwen2.5-coder:7b`, in three node roles | [`logs/trajectories/`](logs/trajectories/) |
+| **The control it is measured against** | the same model, one zero-shot call | [`logs/baseline_results.json`](logs/baseline_results.json) |
+
+**What the human decided rather than the agent.** The scope (assess, never determine),
+the refusal to build a frontend, the model strategy, the rule that no LLM touches
+arithmetic or a lookup, and the decision to publish five claims that turned out narrower
+than first written — all operator calls, and all traceable to a specific instruction in
+`session-01-…md`. [`logs/agent_sessions/README.md`](logs/agent_sessions/README.md) maps
+each of the three agents to the exact file and line its instructions live in.
 
 ---
 
@@ -230,13 +272,31 @@ rigged the comparison. It is a fair control, given every fact it needs.
 | Verdict correct | 5/10 | 9/10 |
 | **All three correct** | **0/10** | **8/10** |
 | Model calls per case | 1 | 2 |
-| Avg wall-clock per case | 37.8 s | 97.7 s |
+| Avg wall-clock per case | 37.8 s | 97.7 s *(not reproducible — see below)* |
 | Marginal API cost | $0.00 | $0.00 |
 | **Human work left over per case** | Recompute all 10 by hand | Read one panel; reject 1 of 10 |
 
-**The workflow costs 2.6× the latency and twice the model calls.** Both run locally, so
-neither has an API bill; the real price is time and local compute. That is a genuine
-trade, not a free win.
+**The accuracy rows are reproducible. The latency row is not, and the difference is
+measured.** I ran the whole 10-case comparison a second time on the same machine, same
+model, same prompts (`logs/comparison_results_run2.json`):
+
+| | Run 1 | Run 2 |
+|---|---|---|
+| HS / RVC / verdict / all-three correct | 9 / 9 / 9 / 8 | **9 / 9 / 9 / 8** |
+| Per-case result payloads identical to run 1 | — | **10 of 10, byte for byte** |
+| Mean agent wall-clock per case | 97.7 s | **198.3 s** |
+
+Every graded output is bit-identical across the two runs — not merely the same score, the
+same JSON. That is what `temperature=0`, grammar-constrained JSON and deterministic
+arithmetic are supposed to buy, and it is now measured rather than asserted. Latency is the
+one thing that moved, and it moved uniformly (1.9–2.6× on all ten cases), which is machine
+load rather than any property of the workflow.
+
+So read the latency figure as an order of magnitude, not a constant. **The workflow costs
+roughly 2.6× the baseline's latency under run 1's conditions and twice the model calls.**
+Both run locally, so neither has an API bill; the real price is time and local compute. That
+is a genuine trade, not a free win — and the honest version of it is that the *ratio* was
+measured once, under one machine state, and I would not defend the second decimal place.
 
 **On that last row, stated carefully.** We did not stopwatch a reviewer, so we are not
 quoting minutes we did not measure. What we can show is what each system *leaves for a
@@ -408,13 +468,15 @@ The two changes with the clearest evidence behind them, in order:
 ```
 data/     mock_tariff_db.json, synthetic_manifests.json, afcfta_state_parties.json
 src/      state.py, tools.py, llm.py, nodes.py, graph.py, baseline.py
-eval/     run_comparison.py
+eval/     run_comparison.py, digest_agent_session.py
 tests/    test_tools.py, test_ground_truth.py, test_report_integrity.py,
           test_checkpoint.py, conftest.py
 logs/     baseline_results.json          all 10 zero-shot calls, verbatim
           comparison_results.json        per-case grading of both systems
+          comparison_results_run2.json   an independent re-run, for variance
           comparison_results_contended.json   a discarded run, kept on purpose
-          trajectories/                  4 full agent runs, incl. one refusal
+          trajectories/                  6 full runs of the product, incl. one refusal
+          agent_sessions/                the coding agent's own trajectories
           checkpoints/                   written before each pause (gitignored:
                                          runtime state, not evidence)
 ```
