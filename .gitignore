@@ -6,5 +6,4 @@ logs/checkpoints/
 logs/_smoke.json
 logs/_*.log
 
-# Personal scratch checklist — never part of the submission.
-TODO-BEFORE-SUBMIT.md
+
