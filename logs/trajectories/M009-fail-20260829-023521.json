@@ -1,0 +1,338 @@
+{
+  "manifest_id": "M009",
+  "raw_input": "ALEXANDRIA GARMENT CO \u2014 Borg El Arab, Egypt\n\nWe cut and sew men's cotton denim trousers (5-pocket, full length) from imported fabric.\n\nUSD per 1,000 pieces:\ndenim fabric, woven China ............ 4400\nsewing thread, India ................. 320\nzippers and shank buttons, China ..... 560\nfusible interlining, Turkey .......... 240\nbrand labels and hangtags, Egypt ..... 300\ncutting sundries and polybags, Egypt . 380\ncopper rivets, Italy ................. 180",
+  "trace": [
+    {
+      "node": "EXTRACT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 67673.14969992731,
+      "detail": {
+        "components_extracted": 7,
+        "components_rejected": [],
+        "prompt_tokens": 369,
+        "completion_tokens": 230
+      },
+      "timestamp": "2026-08-29T01:33:51+00:00"
+    },
+    {
+      "node": "CLASSIFY_HS",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 16279.364999965765,
+      "detail": {
+        "proposed_by_model": "6203.42",
+        "accepted": "6203.42",
+        "overridden_because_not_in_dataset": null,
+        "self_reported_confidence": 1.0,
+        "prompt_tokens": 629,
+        "completion_tokens": 51
+      },
+      "timestamp": "2026-08-29T01:34:07+00:00"
+    },
+    {
+      "node": "LOOKUP_RULE",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.03920006565749645,
+      "detail": {
+        "hs_code": "6203.42",
+        "rvc_threshold": 45.0,
+        "reason": "Matched a rule in the controlled dataset."
+      },
+      "timestamp": "2026-08-29T01:34:07+00:00"
+    },
+    {
+      "node": "CALCULATE_RVC",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 3.0971000669524074,
+      "detail": {
+        "total_cost": 6380.0,
+        "african_sourced_cost": 680.0,
+        "rvc_percent": 10.66,
+        "threshold": 45.0,
+        "margin_pp": -34.34,
+        "status": "FAIL",
+        "basis": "10.66% is below the 45.0% threshold.",
+        "unrecognized_origins": []
+      },
+      "timestamp": "2026-08-29T01:34:07+00:00"
+    },
+    {
+      "node": "VERIFY",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.09940005838871002,
+      "detail": {
+        "errors": [],
+        "warnings": []
+      },
+      "timestamp": "2026-08-29T01:34:07+00:00"
+    },
+    {
+      "node": "HUMAN_REVIEW",
+      "status": "approve",
+      "model": null,
+      "duration_ms": 0.037499936297535896,
+      "detail": {
+        "decision": "approve",
+        "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "edited_hs_code": null,
+        "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M009.checkpoint.json",
+        "seconds_waiting_for_human": 0.0
+      },
+      "timestamp": "2026-08-29T01:34:07+00:00"
+    },
+    {
+      "node": "GENERATE_REPORT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 74079.97770002112,
+      "detail": {
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "prompt_tokens": 358,
+        "completion_tokens": 132
+      },
+      "timestamp": "2026-08-29T01:35:21+00:00"
+    }
+  ],
+  "model_calls": 3,
+  "final_state": {
+    "manifest_id": "M009",
+    "raw_text": "ALEXANDRIA GARMENT CO \u2014 Borg El Arab, Egypt\n\nWe cut and sew men's cotton denim trousers (5-pocket, full length) from imported fabric.\n\nUSD per 1,000 pieces:\ndenim fabric, woven China ............ 4400\nsewing thread, India ................. 320\nzippers and shank buttons, China ..... 560\nfusible interlining, Turkey .......... 240\nbrand labels and hangtags, Egypt ..... 300\ncutting sundries and polybags, Egypt . 380\ncopper rivets, Italy ................. 180",
+    "product_description": "Men's cotton denim trousers (5-pocket, full length)",
+    "bill_of_materials": [
+      {
+        "component_name": "denim fabric",
+        "origin_country": "China",
+        "cost_usd": 4400.0
+      },
+      {
+        "component_name": "sewing thread",
+        "origin_country": "India",
+        "cost_usd": 320.0
+      },
+      {
+        "component_name": "zippers and shank buttons",
+        "origin_country": "China",
+        "cost_usd": 560.0
+      },
+      {
+        "component_name": "fusible interlining",
+        "origin_country": "Turkey",
+        "cost_usd": 240.0
+      },
+      {
+        "component_name": "brand labels and hangtags",
+        "origin_country": "Egypt",
+        "cost_usd": 300.0
+      },
+      {
+        "component_name": "cutting sundries and polybags",
+        "origin_country": "Egypt",
+        "cost_usd": 380.0
+      },
+      {
+        "component_name": "copper rivets",
+        "origin_country": "Italy",
+        "cost_usd": 180.0
+      }
+    ],
+    "hs_code": "6203.42",
+    "hs_classification_confidence": 1.0,
+    "hs_classification_rationale": "Men's or boys' trousers, bib and brace overalls, breeches and shorts, of cotton",
+    "rvc_threshold": 45.0,
+    "rule_description": "Men's or boys' trousers, bib and brace overalls, breeches and shorts, of cotton",
+    "total_cost": 6380.0,
+    "african_sourced_cost": 680.0,
+    "non_african_sourced_cost": 5700.0,
+    "calculated_rvc_percent": 10.66,
+    "unrecognized_origins": [],
+    "compliance_status": "FAIL",
+    "verification_errors": [],
+    "human_decision": "approve",
+    "human_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+    "final_output": {
+      "document_title": "Draft Compliance Assessment Report \u2014 Human Approved",
+      "document_type": "draft_assessment",
+      "manifest_id": "M009",
+      "product_description": "Men's cotton denim trousers (5-pocket, full length)",
+      "assessment": {
+        "hs_code": "6203.42",
+        "hs_code_source": "selected from the controlled dataset",
+        "rule_description": "Men's or boys' trousers, bib and brace overalls, breeches and shorts, of cotton",
+        "rvc_threshold_percent": 45.0,
+        "total_cost_usd": 6380.0,
+        "regionally_sourced_cost_usd": 680.0,
+        "non_regionally_sourced_cost_usd": 5700.0,
+        "calculated_rvc_percent": 10.66,
+        "margin_vs_threshold_pp": -34.34,
+        "borderline_band_pp": 2.0,
+        "compliance_status": "FAIL",
+        "calculation_method": "Build-up, materials-only cost base: regionally sourced component cost divided by total component cost. Computed by a deterministic function, not by a language model."
+      },
+      "bill_of_materials": [
+        {
+          "component_name": "denim fabric",
+          "origin_country": "China",
+          "cost_usd": 4400.0
+        },
+        {
+          "component_name": "sewing thread",
+          "origin_country": "India",
+          "cost_usd": 320.0
+        },
+        {
+          "component_name": "zippers and shank buttons",
+          "origin_country": "China",
+          "cost_usd": 560.0
+        },
+        {
+          "component_name": "fusible interlining",
+          "origin_country": "Turkey",
+          "cost_usd": 240.0
+        },
+        {
+          "component_name": "brand labels and hangtags",
+          "origin_country": "Egypt",
+          "cost_usd": 300.0
+        },
+        {
+          "component_name": "cutting sundries and polybags",
+          "origin_country": "Egypt",
+          "cost_usd": 380.0
+        },
+        {
+          "component_name": "copper rivets",
+          "origin_country": "Italy",
+          "cost_usd": 180.0
+        }
+      ],
+      "human_review": {
+        "decision": "approve",
+        "reviewer_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "reviewed_before_issue": true
+      },
+      "narrative": {
+        "summary": "Your shipment of men's cotton denim trousers failed to meet the required trade compliance criteria.",
+        "what_this_means": "This means your export may be delayed or rejected at the destination country, causing potential delays and additional costs.",
+        "recommended_next_steps": [
+          "Review the HS code and rule requirements for men's cotton denim trousers.",
+          "Ensure all necessary documentation is correctly prepared and submitted with your shipment.",
+          "Consult a trade compliance expert if you are unsure about any aspect of your export"
+        ],
+        "limitations": "This assessment is based on a controlled dataset and does not constitute a legal determination."
+      },
+      "verification": {
+        "errors": [],
+        "warnings": []
+      },
+      "disclaimer": "This is a draft assessment produced against a controlled set of AfCFTA rule data for guidance only. It is not a legal determination of origin, not a certificate of origin, and carries no authority. Thresholds in the underlying dataset are synthetic and illustrative. Confirm any claim with your national customs authority or a licensed customs broker before filing.",
+      "metadata": {
+        "narrative_model": "qwen2.5-coder:7b",
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "model_calls_this_run": 3
+      }
+    },
+    "trace": [
+      {
+        "node": "EXTRACT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 67673.14969992731,
+        "detail": {
+          "components_extracted": 7,
+          "components_rejected": [],
+          "prompt_tokens": 369,
+          "completion_tokens": 230
+        },
+        "timestamp": "2026-08-29T01:33:51+00:00"
+      },
+      {
+        "node": "CLASSIFY_HS",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 16279.364999965765,
+        "detail": {
+          "proposed_by_model": "6203.42",
+          "accepted": "6203.42",
+          "overridden_because_not_in_dataset": null,
+          "self_reported_confidence": 1.0,
+          "prompt_tokens": 629,
+          "completion_tokens": 51
+        },
+        "timestamp": "2026-08-29T01:34:07+00:00"
+      },
+      {
+        "node": "LOOKUP_RULE",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.03920006565749645,
+        "detail": {
+          "hs_code": "6203.42",
+          "rvc_threshold": 45.0,
+          "reason": "Matched a rule in the controlled dataset."
+        },
+        "timestamp": "2026-08-29T01:34:07+00:00"
+      },
+      {
+        "node": "CALCULATE_RVC",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 3.0971000669524074,
+        "detail": {
+          "total_cost": 6380.0,
+          "african_sourced_cost": 680.0,
+          "rvc_percent": 10.66,
+          "threshold": 45.0,
+          "margin_pp": -34.34,
+          "status": "FAIL",
+          "basis": "10.66% is below the 45.0% threshold.",
+          "unrecognized_origins": []
+        },
+        "timestamp": "2026-08-29T01:34:07+00:00"
+      },
+      {
+        "node": "VERIFY",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.09940005838871002,
+        "detail": {
+          "errors": [],
+          "warnings": []
+        },
+        "timestamp": "2026-08-29T01:34:07+00:00"
+      },
+      {
+        "node": "HUMAN_REVIEW",
+        "status": "approve",
+        "model": null,
+        "duration_ms": 0.037499936297535896,
+        "detail": {
+          "decision": "approve",
+          "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+          "edited_hs_code": null,
+          "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M009.checkpoint.json",
+          "seconds_waiting_for_human": 0.0
+        },
+        "timestamp": "2026-08-29T01:34:07+00:00"
+      },
+      {
+        "node": "GENERATE_REPORT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 74079.97770002112,
+        "detail": {
+          "narrative_generated": true,
+          "figures_written_by_model_in_prose": [],
+          "prompt_tokens": 358,
+          "completion_tokens": 132
+        },
+        "timestamp": "2026-08-29T01:35:21+00:00"
+      }
+    ]
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "manifest_id": "M008",
+  "raw_input": "SAPELE SOAP WORKS \u2014 Sapele, Nigeria\n\nProduct: moulded toilet soap bars, 125g, perfumed, for personal washing. Not medicated.\n\nInput costs, USD:\ncrude palm kernel oil, Edo State Nigeria .... 2100\ncaustic soda, China ......................... 640\nfragrance oil, France ....................... 480\nglycerine, Nigeria .......................... 300\ntitanium dioxide, China ..................... 220\nwrapper and shipper carton, Tema Ghana ...... 360",
+  "trace": [
+    {
+      "node": "EXTRACT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 106065.86740002967,
+      "detail": {
+        "components_extracted": 6,
+        "components_rejected": [],
+        "prompt_tokens": 358,
+        "completion_tokens": 213
+      },
+      "timestamp": "2026-08-29T14:17:28+00:00"
+    },
+    {
+      "node": "CLASSIFY_HS",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 69788.35469996557,
+      "detail": {
+        "proposed_by_model": "3401.11",
+        "accepted": "3401.11",
+        "overridden_because_not_in_dataset": null,
+        "self_reported_confidence": 1.0,
+        "prompt_tokens": 631,
+        "completion_tokens": 49
+      },
+      "timestamp": "2026-08-29T14:18:38+00:00"
+    },
+    {
+      "node": "LOOKUP_RULE",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.03560003824532032,
+      "detail": {
+        "hs_code": "3401.11",
+        "rvc_threshold": 30.0,
+        "reason": "Matched a rule in the controlled dataset."
+      },
+      "timestamp": "2026-08-29T14:18:38+00:00"
+    },
+    {
+      "node": "CALCULATE_RVC",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 2.652199938893318,
+      "detail": {
+        "total_cost": 4100.0,
+        "african_sourced_cost": 2760.0,
+        "rvc_percent": 67.32,
+        "threshold": 30.0,
+        "margin_pp": 37.32,
+        "status": "PASS",
+        "basis": "67.32% meets or exceeds the 30.0% threshold.",
+        "unrecognized_origins": []
+      },
+      "timestamp": "2026-08-29T14:18:38+00:00"
+    },
+    {
+      "node": "VERIFY",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.07099984213709831,
+      "detail": {
+        "errors": [],
+        "warnings": []
+      },
+      "timestamp": "2026-08-29T14:18:38+00:00"
+    },
+    {
+      "node": "HUMAN_REVIEW",
+      "status": "approve",
+      "model": null,
+      "duration_ms": 0.03590015694499016,
+      "detail": {
+        "decision": "approve",
+        "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "edited_hs_code": null,
+        "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M008.checkpoint.json",
+        "seconds_waiting_for_human": 0.0
+      },
+      "timestamp": "2026-08-29T14:18:38+00:00"
+    },
+    {
+      "node": "GENERATE_REPORT",
+      "status": "warn",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 69100.2764001023,
+      "detail": {
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "claims_flagged_in_prose": [
+          "summary: 'without any issues' \u2014 unqualified assurance"
+        ],
+        "prompt_tokens": 372,
+        "completion_tokens": 130
+      },
+      "timestamp": "2026-08-29T14:19:47+00:00"
+    }
+  ],
+  "model_calls": 3,
+  "final_state": {
+    "manifest_id": "M008",
+    "raw_text": "SAPELE SOAP WORKS \u2014 Sapele, Nigeria\n\nProduct: moulded toilet soap bars, 125g, perfumed, for personal washing. Not medicated.\n\nInput costs, USD:\ncrude palm kernel oil, Edo State Nigeria .... 2100\ncaustic soda, China ......................... 640\nfragrance oil, France ....................... 480\nglycerine, Nigeria .......................... 300\ntitanium dioxide, China ..................... 220\nwrapper and shipper carton, Tema Ghana ...... 360",
+    "product_description": "moulded toilet soap bars, 125g, perfumed, for personal washing. Not medicated.",
+    "bill_of_materials": [
+      {
+        "component_name": "crude palm kernel oil",
+        "origin_country": "Nigeria",
+        "cost_usd": 2100.0
+      },
+      {
+        "component_name": "caustic soda",
+        "origin_country": "China",
+        "cost_usd": 640.0
+      },
+      {
+        "component_name": "fragrance oil",
+        "origin_country": "France",
+        "cost_usd": 480.0
+      },
+      {
+        "component_name": "glycerine",
+        "origin_country": "Nigeria",
+        "cost_usd": 300.0
+      },
+      {
+        "component_name": "titanium dioxide",
+        "origin_country": "China",
+        "cost_usd": 220.0
+      },
+      {
+        "component_name": "wrapper and shipper carton",
+        "origin_country": "Ghana",
+        "cost_usd": 360.0
+      }
+    ],
+    "hs_code": "3401.11",
+    "hs_classification_confidence": 1.0,
+    "hs_classification_rationale": "Soap and organic surface-active products in bars, cakes or moulded shapes, for toilet use.",
+    "rvc_threshold": 30.0,
+    "rule_description": "Soap and organic surface-active products in bars, cakes or moulded shapes, for toilet use, including medicated products",
+    "total_cost": 4100.0,
+    "african_sourced_cost": 2760.0,
+    "non_african_sourced_cost": 1340.0,
+    "calculated_rvc_percent": 67.32,
+    "unrecognized_origins": [],
+    "compliance_status": "PASS",
+    "verification_errors": [],
+    "human_decision": "approve",
+    "human_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+    "final_output": {
+      "document_title": "Draft Compliance Assessment Report \u2014 Human Approved",
+      "document_type": "draft_assessment",
+      "manifest_id": "M008",
+      "product_description": "moulded toilet soap bars, 125g, perfumed, for personal washing. Not medicated.",
+      "assessment": {
+        "hs_code": "3401.11",
+        "hs_code_source": "selected from the controlled dataset",
+        "rule_description": "Soap and organic surface-active products in bars, cakes or moulded shapes, for toilet use, including medicated products",
+        "rvc_threshold_percent": 30.0,
+        "total_cost_usd": 4100.0,
+        "regionally_sourced_cost_usd": 2760.0,
+        "non_regionally_sourced_cost_usd": 1340.0,
+        "calculated_rvc_percent": 67.32,
+        "margin_vs_threshold_pp": 37.32,
+        "borderline_band_pp": 2.0,
+        "compliance_status": "PASS",
+        "calculation_method": "Build-up, materials-only cost base: regionally sourced component cost divided by total component cost. Computed by a deterministic function, not by a language model."
+      },
+      "bill_of_materials": [
+        {
+          "component_name": "crude palm kernel oil",
+          "origin_country": "Nigeria",
+          "cost_usd": 2100.0
+        },
+        {
+          "component_name": "caustic soda",
+          "origin_country": "China",
+          "cost_usd": 640.0
+        },
+        {
+          "component_name": "fragrance oil",
+          "origin_country": "France",
+          "cost_usd": 480.0
+        },
+        {
+          "component_name": "glycerine",
+          "origin_country": "Nigeria",
+          "cost_usd": 300.0
+        },
+        {
+          "component_name": "titanium dioxide",
+          "origin_country": "China",
+          "cost_usd": 220.0
+        },
+        {
+          "component_name": "wrapper and shipper carton",
+          "origin_country": "Ghana",
+          "cost_usd": 360.0
+        }
+      ],
+      "human_review": {
+        "decision": "approve",
+        "reviewer_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "reviewed_before_issue": true
+      },
+      "narrative": {
+        "summary": "Your moulded toilet soap bars have been assessed and found to comply with the regulations. You can export them without any issues.",
+        "what_this_means": "This means you can continue exporting your soap bars as planned, knowing they meet the necessary trade compliance requirements.",
+        "recommended_next_steps": [
+          "Prepare your shipment documentation as usual.",
+          "Ensure all labels and packaging are correctly labeled for international markets.",
+          "Keep records of this assessment for future reference."
+        ],
+        "limitations": "This is an assessment based on a controlled dataset. It does not constitute a legal determination by any authority."
+      },
+      "verification": {
+        "errors": [],
+        "warnings": []
+      },
+      "disclaimer": "This is a draft assessment produced against a controlled set of AfCFTA rule data for guidance only. It is not a legal determination of origin, not a certificate of origin, and carries no authority. Thresholds in the underlying dataset are synthetic and illustrative. Confirm any claim with your national customs authority or a licensed customs broker before filing.",
+      "metadata": {
+        "narrative_model": "qwen2.5-coder:7b",
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "claims_flagged_in_prose": [
+          "summary: 'without any issues' \u2014 unqualified assurance"
+        ],
+        "model_calls_this_run": 3
+      }
+    },
+    "trace": [
+      {
+        "node": "EXTRACT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 106065.86740002967,
+        "detail": {
+          "components_extracted": 6,
+          "components_rejected": [],
+          "prompt_tokens": 358,
+          "completion_tokens": 213
+        },
+        "timestamp": "2026-08-29T14:17:28+00:00"
+      },
+      {
+        "node": "CLASSIFY_HS",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 69788.35469996557,
+        "detail": {
+          "proposed_by_model": "3401.11",
+          "accepted": "3401.11",
+          "overridden_because_not_in_dataset": null,
+          "self_reported_confidence": 1.0,
+          "prompt_tokens": 631,
+          "completion_tokens": 49
+        },
+        "timestamp": "2026-08-29T14:18:38+00:00"
+      },
+      {
+        "node": "LOOKUP_RULE",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.03560003824532032,
+        "detail": {
+          "hs_code": "3401.11",
+          "rvc_threshold": 30.0,
+          "reason": "Matched a rule in the controlled dataset."
+        },
+        "timestamp": "2026-08-29T14:18:38+00:00"
+      },
+      {
+        "node": "CALCULATE_RVC",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 2.652199938893318,
+        "detail": {
+          "total_cost": 4100.0,
+          "african_sourced_cost": 2760.0,
+          "rvc_percent": 67.32,
+          "threshold": 30.0,
+          "margin_pp": 37.32,
+          "status": "PASS",
+          "basis": "67.32% meets or exceeds the 30.0% threshold.",
+          "unrecognized_origins": []
+        },
+        "timestamp": "2026-08-29T14:18:38+00:00"
+      },
+      {
+        "node": "VERIFY",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.07099984213709831,
+        "detail": {
+          "errors": [],
+          "warnings": []
+        },
+        "timestamp": "2026-08-29T14:18:38+00:00"
+      },
+      {
+        "node": "HUMAN_REVIEW",
+        "status": "approve",
+        "model": null,
+        "duration_ms": 0.03590015694499016,
+        "detail": {
+          "decision": "approve",
+          "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+          "edited_hs_code": null,
+          "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M008.checkpoint.json",
+          "seconds_waiting_for_human": 0.0
+        },
+        "timestamp": "2026-08-29T14:18:38+00:00"
+      },
+      {
+        "node": "GENERATE_REPORT",
+        "status": "warn",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 69100.2764001023,
+        "detail": {
+          "narrative_generated": true,
+          "figures_written_by_model_in_prose": [],
+          "claims_flagged_in_prose": [
+            "summary: 'without any issues' \u2014 unqualified assurance"
+          ],
+          "prompt_tokens": 372,
+          "completion_tokens": 130
+        },
+        "timestamp": "2026-08-29T14:19:47+00:00"
+      }
+    ]
+  }
+}

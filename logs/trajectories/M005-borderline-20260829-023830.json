@@ -1,0 +1,344 @@
+{
+  "manifest_id": "M005",
+  "raw_input": "NILE DELTA FOOTWEAR SAE \u2014 Damietta, Egypt\n\nWe produce men's leather derby shoes, uppers of bovine leather, outer soles of moulded rubber, low cut (does not cover the ankle).\n\nInput costing, USD per 500 pairs:\n- bovine leather uppers, tanned Damietta Egypt: 3200\n- leather insoles, Egypt: 480\n- lining leather, Fez Morocco: 400\n- moulded rubber outsoles, China: 1900\n- laces and metal eyelets, India: 260\n- adhesives and primers, Germany: 640\n- shoe boxes and tissue, Turkey: 1120\n\nWe are close to the line and need to know where we stand.",
+  "trace": [
+    {
+      "node": "EXTRACT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 95084.15699994657,
+      "detail": {
+        "components_extracted": 7,
+        "components_rejected": [],
+        "prompt_tokens": 408,
+        "completion_tokens": 244
+      },
+      "timestamp": "2026-08-29T01:37:01+00:00"
+    },
+    {
+      "node": "CLASSIFY_HS",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 16174.769300036132,
+      "detail": {
+        "proposed_by_model": "6403.99",
+        "accepted": "6403.99",
+        "overridden_because_not_in_dataset": null,
+        "self_reported_confidence": 1.0,
+        "prompt_tokens": 644,
+        "completion_tokens": 52
+      },
+      "timestamp": "2026-08-29T01:37:17+00:00"
+    },
+    {
+      "node": "LOOKUP_RULE",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.03520003519952297,
+      "detail": {
+        "hs_code": "6403.99",
+        "rvc_threshold": 50.0,
+        "reason": "Matched a rule in the controlled dataset."
+      },
+      "timestamp": "2026-08-29T01:37:17+00:00"
+    },
+    {
+      "node": "CALCULATE_RVC",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 3.3564999466761947,
+      "detail": {
+        "total_cost": 8000.0,
+        "african_sourced_cost": 4080.0,
+        "rvc_percent": 51.0,
+        "threshold": 50.0,
+        "margin_pp": 1.0,
+        "status": "BORDERLINE",
+        "basis": "51.00% is within the +/-2.0pp borderline band around the 50.0% threshold; too close to call without review.",
+        "unrecognized_origins": []
+      },
+      "timestamp": "2026-08-29T01:37:17+00:00"
+    },
+    {
+      "node": "VERIFY",
+      "status": "warn",
+      "model": null,
+      "duration_ms": 0.09599991608411074,
+      "detail": {
+        "errors": [],
+        "warnings": [
+          "Result is inside the +/-2.0pp borderline band; the pass/fail call needs human judgement."
+        ]
+      },
+      "timestamp": "2026-08-29T01:37:17+00:00"
+    },
+    {
+      "node": "HUMAN_REVIEW",
+      "status": "approve",
+      "model": null,
+      "duration_ms": 0.03730005118995905,
+      "detail": {
+        "decision": "approve",
+        "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "edited_hs_code": null,
+        "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M005.checkpoint.json",
+        "seconds_waiting_for_human": 0.0
+      },
+      "timestamp": "2026-08-29T01:37:17+00:00"
+    },
+    {
+      "node": "GENERATE_REPORT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 72760.4321000399,
+      "detail": {
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "prompt_tokens": 388,
+        "completion_tokens": 135
+      },
+      "timestamp": "2026-08-29T01:38:30+00:00"
+    }
+  ],
+  "model_calls": 3,
+  "final_state": {
+    "manifest_id": "M005",
+    "raw_text": "NILE DELTA FOOTWEAR SAE \u2014 Damietta, Egypt\n\nWe produce men's leather derby shoes, uppers of bovine leather, outer soles of moulded rubber, low cut (does not cover the ankle).\n\nInput costing, USD per 500 pairs:\n- bovine leather uppers, tanned Damietta Egypt: 3200\n- leather insoles, Egypt: 480\n- lining leather, Fez Morocco: 400\n- moulded rubber outsoles, China: 1900\n- laces and metal eyelets, India: 260\n- adhesives and primers, Germany: 640\n- shoe boxes and tissue, Turkey: 1120\n\nWe are close to the line and need to know where we stand.",
+    "product_description": "Men's leather derby shoes with bovine leather uppers, moulded rubber outsoles, and various other components.",
+    "bill_of_materials": [
+      {
+        "component_name": "bovine leather uppers",
+        "origin_country": "Egypt",
+        "cost_usd": 3200.0
+      },
+      {
+        "component_name": "leather insoles",
+        "origin_country": "Egypt",
+        "cost_usd": 480.0
+      },
+      {
+        "component_name": "lining leather",
+        "origin_country": "Morocco",
+        "cost_usd": 400.0
+      },
+      {
+        "component_name": "moulded rubber outsoles",
+        "origin_country": "China",
+        "cost_usd": 1900.0
+      },
+      {
+        "component_name": "laces and metal eyelets",
+        "origin_country": "India",
+        "cost_usd": 260.0
+      },
+      {
+        "component_name": "adhesives and primers",
+        "origin_country": "Germany",
+        "cost_usd": 640.0
+      },
+      {
+        "component_name": "shoe boxes and tissue",
+        "origin_country": "Turkey",
+        "cost_usd": 1120.0
+      }
+    ],
+    "hs_code": "6403.99",
+    "hs_classification_confidence": 1.0,
+    "hs_classification_rationale": "Men's leather derby shoes with bovine leather uppers and moulded rubber outsoles fall under this category.",
+    "rvc_threshold": 50.0,
+    "rule_description": "Other footwear with outer soles of rubber or plastics and uppers of leather, not covering the ankle",
+    "total_cost": 8000.0,
+    "african_sourced_cost": 4080.0,
+    "non_african_sourced_cost": 3920.0,
+    "calculated_rvc_percent": 51.0,
+    "unrecognized_origins": [],
+    "compliance_status": "BORDERLINE",
+    "verification_errors": [],
+    "human_decision": "approve",
+    "human_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+    "final_output": {
+      "document_title": "Draft Compliance Assessment Report \u2014 Human Approved",
+      "document_type": "draft_assessment",
+      "manifest_id": "M005",
+      "product_description": "Men's leather derby shoes with bovine leather uppers, moulded rubber outsoles, and various other components.",
+      "assessment": {
+        "hs_code": "6403.99",
+        "hs_code_source": "selected from the controlled dataset",
+        "rule_description": "Other footwear with outer soles of rubber or plastics and uppers of leather, not covering the ankle",
+        "rvc_threshold_percent": 50.0,
+        "total_cost_usd": 8000.0,
+        "regionally_sourced_cost_usd": 4080.0,
+        "non_regionally_sourced_cost_usd": 3920.0,
+        "calculated_rvc_percent": 51.0,
+        "margin_vs_threshold_pp": 1.0,
+        "borderline_band_pp": 2.0,
+        "compliance_status": "BORDERLINE",
+        "calculation_method": "Build-up, materials-only cost base: regionally sourced component cost divided by total component cost. Computed by a deterministic function, not by a language model."
+      },
+      "bill_of_materials": [
+        {
+          "component_name": "bovine leather uppers",
+          "origin_country": "Egypt",
+          "cost_usd": 3200.0
+        },
+        {
+          "component_name": "leather insoles",
+          "origin_country": "Egypt",
+          "cost_usd": 480.0
+        },
+        {
+          "component_name": "lining leather",
+          "origin_country": "Morocco",
+          "cost_usd": 400.0
+        },
+        {
+          "component_name": "moulded rubber outsoles",
+          "origin_country": "China",
+          "cost_usd": 1900.0
+        },
+        {
+          "component_name": "laces and metal eyelets",
+          "origin_country": "India",
+          "cost_usd": 260.0
+        },
+        {
+          "component_name": "adhesives and primers",
+          "origin_country": "Germany",
+          "cost_usd": 640.0
+        },
+        {
+          "component_name": "shoe boxes and tissue",
+          "origin_country": "Turkey",
+          "cost_usd": 1120.0
+        }
+      ],
+      "human_review": {
+        "decision": "approve",
+        "reviewer_notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+        "reviewed_before_issue": true
+      },
+      "narrative": {
+        "summary": "Your men's leather derby shoes are considered borderline under the current trade rules.",
+        "what_this_means": "This means your shoes might be allowed to export, but there is some uncertainty. You should check with your local customs authority for final approval.",
+        "recommended_next_steps": [
+          "Contact your local customs authority for a formal assessment.",
+          "Review the latest trade regulations and guidelines provided by your country's government.",
+          "Keep detailed records of your production process and materials used."
+        ],
+        "limitations": "This is an assessment based on a controlled dataset and not a legal determination. Always seek official confirmation before exporting."
+      },
+      "verification": {
+        "errors": [],
+        "warnings": [
+          "Result is inside the +/-2.0pp borderline band; the pass/fail call needs human judgement."
+        ]
+      },
+      "disclaimer": "This is a draft assessment produced against a controlled set of AfCFTA rule data for guidance only. It is not a legal determination of origin, not a certificate of origin, and carries no authority. Thresholds in the underlying dataset are synthetic and illustrative. Confirm any claim with your national customs authority or a licensed customs broker before filing.",
+      "metadata": {
+        "narrative_model": "qwen2.5-coder:7b",
+        "narrative_generated": true,
+        "figures_written_by_model_in_prose": [],
+        "model_calls_this_run": 3
+      }
+    },
+    "trace": [
+      {
+        "node": "EXTRACT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 95084.15699994657,
+        "detail": {
+          "components_extracted": 7,
+          "components_rejected": [],
+          "prompt_tokens": 408,
+          "completion_tokens": 244
+        },
+        "timestamp": "2026-08-29T01:37:01+00:00"
+      },
+      {
+        "node": "CLASSIFY_HS",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 16174.769300036132,
+        "detail": {
+          "proposed_by_model": "6403.99",
+          "accepted": "6403.99",
+          "overridden_because_not_in_dataset": null,
+          "self_reported_confidence": 1.0,
+          "prompt_tokens": 644,
+          "completion_tokens": 52
+        },
+        "timestamp": "2026-08-29T01:37:17+00:00"
+      },
+      {
+        "node": "LOOKUP_RULE",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.03520003519952297,
+        "detail": {
+          "hs_code": "6403.99",
+          "rvc_threshold": 50.0,
+          "reason": "Matched a rule in the controlled dataset."
+        },
+        "timestamp": "2026-08-29T01:37:17+00:00"
+      },
+      {
+        "node": "CALCULATE_RVC",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 3.3564999466761947,
+        "detail": {
+          "total_cost": 8000.0,
+          "african_sourced_cost": 4080.0,
+          "rvc_percent": 51.0,
+          "threshold": 50.0,
+          "margin_pp": 1.0,
+          "status": "BORDERLINE",
+          "basis": "51.00% is within the +/-2.0pp borderline band around the 50.0% threshold; too close to call without review.",
+          "unrecognized_origins": []
+        },
+        "timestamp": "2026-08-29T01:37:17+00:00"
+      },
+      {
+        "node": "VERIFY",
+        "status": "warn",
+        "model": null,
+        "duration_ms": 0.09599991608411074,
+        "detail": {
+          "errors": [],
+          "warnings": [
+            "Result is inside the +/-2.0pp borderline band; the pass/fail call needs human judgement."
+          ]
+        },
+        "timestamp": "2026-08-29T01:37:17+00:00"
+      },
+      {
+        "node": "HUMAN_REVIEW",
+        "status": "approve",
+        "model": null,
+        "duration_ms": 0.03730005118995905,
+        "detail": {
+          "decision": "approve",
+          "notes": "SCRIPTED DECISION (approve) supplied by the --decision flag for non-interactive trajectory capture. This was not a human sign-off.",
+          "edited_hs_code": null,
+          "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M005.checkpoint.json",
+          "seconds_waiting_for_human": 0.0
+        },
+        "timestamp": "2026-08-29T01:37:17+00:00"
+      },
+      {
+        "node": "GENERATE_REPORT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 72760.4321000399,
+        "detail": {
+          "narrative_generated": true,
+          "figures_written_by_model_in_prose": [],
+          "prompt_tokens": 388,
+          "completion_tokens": 135
+        },
+        "timestamp": "2026-08-29T01:38:30+00:00"
+      }
+    ]
+  }
+}
