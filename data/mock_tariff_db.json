@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "dataset_name": "Mock AfCFTA Rules-of-Origin RVC Threshold Table",
+    "version": "0.1.0",
+    "provenance": "SYNTHETIC. HS subheadings are real HS-2022 six-digit codes. The rvc_threshold values are plausible illustrative figures chosen for this hackathon build; they are NOT transcribed from the AfCFTA Annex 2 Appendix IV product-specific rules and must not be relied on for any real trade decision.",
+    "rvc_method": "build_up_materials_only",
+    "borderline_band_pp": 2.0,
+    "threshold_units": "percent_regional_value_content",
+    "record_count": 10
+  },
+  "rules": {
+    "1806.32": {
+      "description": "Chocolate and other food preparations containing cocoa, in blocks, slabs or bars, not filled, weighing 2 kg or less",
+      "sector": "Agro-processing / confectionery",
+      "rvc_threshold": 40.0
+    },
+    "0901.21": {
+      "description": "Coffee, roasted, not decaffeinated",
+      "sector": "Agro-processing / beverages",
+      "rvc_threshold": 35.0
+    },
+    "6109.10": {
+      "description": "T-shirts, singlets and other vests, knitted or crocheted, of cotton",
+      "sector": "Textiles and apparel",
+      "rvc_threshold": 40.0
+    },
+    "6203.42": {
+      "description": "Men's or boys' trousers, bib and brace overalls, breeches and shorts, of cotton",
+      "sector": "Textiles and apparel",
+      "rvc_threshold": 45.0
+    },
+    "4202.21": {
+      "description": "Handbags, whether or not with shoulder strap, including those without handle, with outer surface of leather, of composition leather or of patent leather",
+      "sector": "Leather goods",
+      "rvc_threshold": 45.0
+    },
+    "6403.99": {
+      "description": "Other footwear with outer soles of rubber or plastics and uppers of leather, not covering the ankle",
+      "sector": "Footwear",
+      "rvc_threshold": 50.0
+    },
+    "9403.60": {
+      "description": "Other wooden furniture",
+      "sector": "Wood products / furniture",
+      "rvc_threshold": 35.0
+    },
+    "3401.11": {
+      "description": "Soap and organic surface-active products in bars, cakes or moulded shapes, for toilet use, including medicated products",
+      "sector": "Chemicals / personal care",
+      "rvc_threshold": 30.0
+    },
+    "3923.30": {
+      "description": "Carboys, bottles, flasks and similar articles for the conveyance or packing of goods, of plastics",
+      "sector": "Plastics / packaging",
+      "rvc_threshold": 35.0
+    },
+    "8544.42": {
+      "description": "Other electric conductors, for a voltage not exceeding 1000 V, fitted with connectors",
+      "sector": "Electrical assemblies / wiring harnesses",
+      "rvc_threshold": 55.0
+    }
+  }
+}

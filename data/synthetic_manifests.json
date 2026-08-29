@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "dataset_name": "Synthetic exporter manifests with known ground truth",
+    "version": "0.1.0",
+    "provenance": "SYNTHETIC. Product descriptions, suppliers and costs are invented for evaluation. Ground-truth RVC percentages were computed independently from the stated bill of materials using the build-up (materials-only) method and are asserted by tests in tests/test_ground_truth.py, so the dataset cannot silently drift from the calculator.",
+    "rvc_method": "african_sourced_cost / total_cost * 100",
+    "borderline_band_pp": 2.0,
+    "case_mix": {
+      "clear_pass": 5,
+      "clear_fail": 2,
+      "borderline": 2,
+      "classification_unavailable": 1
+    },
+    "record_count": 10
+  },
+  "manifests": [
+    {
+      "manifest_id": "M001",
+      "label": "Ghana cocoa — dark chocolate bars",
+      "raw_text": "GOLDEN COAST CONFECTIONERY LTD — Accra, Ghana\nExport enquiry: preferential tariff treatment under AfCFTA\n\nWe manufacture 70% dark chocolate bars, moulded in 100g slabs, not filled, retail wrapped. Monthly production batch costed below (USD, per batch).\n\nInputs:\n- Cocoa mass from our own Ghana grinding line ......... 4,200.00\n- Cocoa butter, purchased Abidjan, Cote d'Ivoire ...... 2,600.00\n- Cane sugar, Mumias, Kenya ........................... 900.00\n- Skimmed milk powder, imported Netherlands ........... 1,400.00\n- Soy lecithin emulsifier, Germany .................... 180.00\n- Printed foil wrapper, China ......................... 520.00\n- Outer carton, Tema, Ghana ........................... 400.00\n\nWe want to know if this qualifies for preference.",
+      "ground_truth": {
+        "expected_hs_code": "1806.32",
+        "expected_component_count": 7,
+        "expected_total_cost": 10200.0,
+        "expected_african_sourced_cost": 8100.0,
+        "expected_rvc_percent": 79.41,
+        "expected_rvc_threshold": 40.0,
+        "expected_compliance_status": "PASS",
+        "notes": "Clear pass. Cocoa mass, cocoa butter, sugar and carton all regionally sourced; only dairy, lecithin and foil are extra-regional."
+      }
+    },
+    {
+      "manifest_id": "M002",
+      "label": "Morocco wiring harness — extra-regional inputs dominate",
+      "raw_text": "ATLAS AUTO COMPONENTS SARL — Tangier Free Zone, Morocco\n\nProduct: insulated automotive wiring harness assembly, 12V, fitted with moulded connectors at both ends. Supplied to a vehicle assembler.\n\nBill of materials per 1,000 units, USD:\ncopper conductor wire, Shanghai China, 6800\nPVC insulation compound, Gujarat India, 1500\nconnector housings, Bavaria Germany, 3200\ncrimp terminals, Shenzhen China, 1800\ncorrugated protective tubing, Casablanca Morocco, 700\nharness tape and cable ties, Casablanca Morocco, 450\nrubber grommets, 10th of Ramadan City Egypt, 550\n\nCan we claim AfCFTA preference on this?",
+      "ground_truth": {
+        "expected_hs_code": "8544.42",
+        "expected_component_count": 7,
+        "expected_total_cost": 15000.0,
+        "expected_african_sourced_cost": 1700.0,
+        "expected_rvc_percent": 11.33,
+        "expected_rvc_threshold": 55.0,
+        "expected_compliance_status": "FAIL",
+        "notes": "Clear fail. Assembly-only operation: copper, insulation, housings and terminals are all imported. High 55% threshold makes this unambiguous."
+      }
+    },
+    {
+      "manifest_id": "M003",
+      "label": "Kenya knitted cotton T-shirts",
+      "raw_text": "RIFT VALLEY KNITWEAR — Athi River EPZ, Kenya\n\nWe knit and make up plain cotton T-shirts (short sleeve, crew neck, single jersey) for export. Costing for a 5,000-piece order in US dollars:\n\ncombed cotton yarn spun in Eldoret, Kenya - 3100\nreactive dyes and process chemicals from India - 620\npolyester sewing thread, Alexandria Egypt - 240\nwoven neck label, China - 90\nelastane yarn for neck rib, Turkey - 310\nprinted heat transfer applied in Nairobi, Kenya - 380\npolybags and export carton, Nairobi Kenya - 260\n\nPlease assess origin eligibility.",
+      "ground_truth": {
+        "expected_hs_code": "6109.10",
+        "expected_component_count": 7,
+        "expected_total_cost": 5000.0,
+        "expected_african_sourced_cost": 3980.0,
+        "expected_rvc_percent": 79.6,
+        "expected_rvc_threshold": 40.0,
+        "expected_compliance_status": "PASS",
+        "notes": "Clear pass. Regional yarn dominates the cost base."
+      }
+    },
+    {
+      "manifest_id": "M004",
+      "label": "Nigeria leather handbags — moderate pass",
+      "raw_text": "KANO LEATHERWORKS — Kano, Nigeria\n\nProduct description: women's shoulder handbag, outer surface full-grain goat leather, textile lined, metal clasp closure.\n\nPer-batch input costs (USD):\nFull-grain goat leather, tanned Kano Nigeria .... 2800\nPolyester lining fabric, China ................. 620\nZippers, China ................................. 480\nMetal hardware - clasps and D-rings, India ..... 700\nContact adhesive, Germany ...................... 210\nNylon thread, Egypt ............................ 190\nCotton dust bag and gift box, Lagos Nigeria .... 400",
+      "ground_truth": {
+        "expected_hs_code": "4202.21",
+        "expected_component_count": 7,
+        "expected_total_cost": 5400.0,
+        "expected_african_sourced_cost": 3390.0,
+        "expected_rvc_percent": 62.78,
+        "expected_rvc_threshold": 45.0,
+        "expected_compliance_status": "PASS",
+        "notes": "Pass with a real margin but not overwhelming — leather is the dominant regional input, hardware and lining are imported."
+      }
+    },
+    {
+      "manifest_id": "M005",
+      "label": "Egypt leather footwear — BORDERLINE just above threshold",
+      "raw_text": "NILE DELTA FOOTWEAR SAE — Damietta, Egypt\n\nWe produce men's leather derby shoes, uppers of bovine leather, outer soles of moulded rubber, low cut (does not cover the ankle).\n\nInput costing, USD per 500 pairs:\n- bovine leather uppers, tanned Damietta Egypt: 3200\n- leather insoles, Egypt: 480\n- lining leather, Fez Morocco: 400\n- moulded rubber outsoles, China: 1900\n- laces and metal eyelets, India: 260\n- adhesives and primers, Germany: 640\n- shoe boxes and tissue, Turkey: 1120\n\nWe are close to the line and need to know where we stand.",
+      "ground_truth": {
+        "expected_hs_code": "6403.99",
+        "expected_component_count": 7,
+        "expected_total_cost": 8000.0,
+        "expected_african_sourced_cost": 4080.0,
+        "expected_rvc_percent": 51.0,
+        "expected_rvc_threshold": 50.0,
+        "expected_compliance_status": "BORDERLINE",
+        "notes": "DELIBERATELY BORDERLINE. 51.00% against a 50% threshold — clears the rule by 1.0pp, inside the 2pp band, so it must NOT be reported as a clean PASS. Packaging sourced from Turkey is what drags it down; a reviewer would flag that as the actionable lever."
+      }
+    },
+    {
+      "manifest_id": "M006",
+      "label": "South Africa PET bottles — BORDERLINE just below threshold",
+      "raw_text": "CAPE POLYMER PACKAGING (PTY) LTD — Epping, South Africa\n\nProduct: blow-moulded PET bottles, 500ml, for conveyance of bottled beverages. Supplied with closures.\n\nMaterials, USD per production run:\nvirgin PET resin, imported UAE .............. 5400\ncolour masterbatch, Germany ................. 900\ncaps and closures, China .................... 1120\nshrink film for palletising, India .......... 500\nrecycled PET flake, Cape Town South Africa .. 2600\nself-adhesive labels, South Africa .......... 900\nshipping cartons, South Africa .............. 580",
+      "ground_truth": {
+        "expected_hs_code": "3923.30",
+        "expected_component_count": 7,
+        "expected_total_cost": 12000.0,
+        "expected_african_sourced_cost": 4080.0,
+        "expected_rvc_percent": 34.0,
+        "expected_rvc_threshold": 35.0,
+        "expected_compliance_status": "BORDERLINE",
+        "notes": "DELIBERATELY BORDERLINE. 34.00% against a 35% threshold — misses by 1.0pp, inside the 2pp band. Must NOT be reported as a flat FAIL: substituting some imported virgin resin for regional recycled flake would close the gap, which is exactly the advice a human reviewer should give."
+      }
+    },
+    {
+      "manifest_id": "M007",
+      "label": "Rwanda roasted coffee",
+      "raw_text": "VIRUNGA ROASTERS LTD — Kigali, Rwanda\n\nWe buy green Arabica, roast it in Kigali, and export retail-packed roasted coffee (not decaffeinated), 250g valve packs.\n\nCosts in USD per consignment:\ngreen coffee beans, Nyamasheke Rwanda .......... 5200\ngreen coffee beans, Nyeri Kenya ................ 1400\nvalve-lined foil pouches, China ................ 900\nprinted labels, Kigali Rwanda .................. 260\nnitrogen flush gas, South Africa ............... 140\nexport cartons, Kigali Rwanda .................. 300",
+      "ground_truth": {
+        "expected_hs_code": "0901.21",
+        "expected_component_count": 6,
+        "expected_total_cost": 8200.0,
+        "expected_african_sourced_cost": 7200.0,
+        "expected_rvc_percent": 87.8,
+        "expected_rvc_threshold": 35.0,
+        "expected_compliance_status": "PASS",
+        "notes": "Strong pass. Also tests cumulation across two State Parties (Rwanda + Kenya green beans both count as regional)."
+      }
+    },
+    {
+      "manifest_id": "M008",
+      "label": "Nigeria toilet soap",
+      "raw_text": "SAPELE SOAP WORKS — Sapele, Nigeria\n\nProduct: moulded toilet soap bars, 125g, perfumed, for personal washing. Not medicated.\n\nInput costs, USD:\ncrude palm kernel oil, Edo State Nigeria .... 2100\ncaustic soda, China ......................... 640\nfragrance oil, France ....................... 480\nglycerine, Nigeria .......................... 300\ntitanium dioxide, China ..................... 220\nwrapper and shipper carton, Tema Ghana ...... 360",
+      "ground_truth": {
+        "expected_hs_code": "3401.11",
+        "expected_component_count": 6,
+        "expected_total_cost": 4100.0,
+        "expected_african_sourced_cost": 2760.0,
+        "expected_rvc_percent": 67.32,
+        "expected_rvc_threshold": 30.0,
+        "expected_compliance_status": "PASS",
+        "notes": "Clear pass against the lowest threshold in the table. Also tests cross-border regional packaging (Ghana carton for a Nigerian producer)."
+      }
+    },
+    {
+      "manifest_id": "M009",
+      "label": "Egypt men's cotton trousers — cut-and-sew only",
+      "raw_text": "ALEXANDRIA GARMENT CO — Borg El Arab, Egypt\n\nWe cut and sew men's cotton denim trousers (5-pocket, full length) from imported fabric.\n\nUSD per 1,000 pieces:\ndenim fabric, woven China ............ 4400\nsewing thread, India ................. 320\nzippers and shank buttons, China ..... 560\nfusible interlining, Turkey .......... 240\nbrand labels and hangtags, Egypt ..... 300\ncutting sundries and polybags, Egypt . 380\ncopper rivets, Italy ................. 180",
+      "ground_truth": {
+        "expected_hs_code": "6203.42",
+        "expected_component_count": 7,
+        "expected_total_cost": 6380.0,
+        "expected_african_sourced_cost": 680.0,
+        "expected_rvc_percent": 10.66,
+        "expected_rvc_threshold": 45.0,
+        "expected_compliance_status": "FAIL",
+        "notes": "Clear fail. Classic cut-and-sew case: imported fabric is ~69% of the cost base on its own."
+      }
+    },
+    {
+      "manifest_id": "M010",
+      "label": "South Africa solar PV module — outside the controlled rule set",
+      "raw_text": "KAROO SOLAR ASSEMBLY (PTY) LTD — Kimberley, South Africa\n\nProduct: monocrystalline silicon photovoltaic module, 450 W, glass-fronted, aluminium framed, with junction box. Assembled at our Kimberley plant.\n\nUSD per 100 modules:\nmonocrystalline PV cells, China ......... 8200\ntempered front glass, China ............. 1400\nanodised aluminium frame, South Africa .. 1600\njunction box with diodes, China ......... 400\nEVA encapsulant film, Vietnam ........... 600\npolymer backsheet, South Korea .......... 500\ntinned copper busbar ribbon, India ...... 300",
+      "ground_truth": {
+        "expected_hs_code": "CLASSIFICATION_UNAVAILABLE",
+        "expected_component_count": 7,
+        "expected_total_cost": 13000.0,
+        "expected_african_sourced_cost": 1600.0,
+        "expected_rvc_percent": 12.31,
+        "expected_rvc_threshold": null,
+        "expected_compliance_status": "NEEDS_HUMAN_REVIEW",
+        "notes": "CONTROL CASE. A PV module is HS 8541.43, which is deliberately absent from mock_tariff_db.json. The correct behaviour is to return CLASSIFICATION_UNAVAILABLE and route to human review. RVC arithmetic is still reported (12.31%) because it depends only on the bill of materials, but no threshold comparison may be made. Any run that emits a real HS code here — especially the superficially adjacent 8544.42 — is a guess and counts as WRONG."
+      }
+    }
+  ]
+}
