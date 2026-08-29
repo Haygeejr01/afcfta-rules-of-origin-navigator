@@ -1,0 +1,4 @@
+# Built on Windows, read on whatever a reviewer happens to use. Normalise to LF in
+# the repository so the JSON datasets and trajectory logs are byte-comparable across
+# platforms -- the evaluation cites exact figures out of those files.
+* text=auto eol=lf

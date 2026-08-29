@@ -1,0 +1,5 @@
+# Direct dependencies only. Transitive packages are resolved by pip.
+# Versions are the ones the reported results were produced with.
+pydantic==2.13.5
+requests==2.34.2
+pytest==9.1.1
