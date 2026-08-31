@@ -13,6 +13,9 @@ and putting a human reviewer in front of the answer before any document is issue
 > in the dataset's own `provenance` field. Any real claim must be confirmed with a
 > national customs authority or a licensed customs broker.
 
+**Demo video:** [youtu.be/8y7oUg1b3nU](https://youtu.be/8y7oUg1b3nU) — 4:55, captioned. The
+video description carries chapter markers and a written walkthrough of `CHANGELOG.md`.
+
 ---
 
 ## The user and the bottleneck

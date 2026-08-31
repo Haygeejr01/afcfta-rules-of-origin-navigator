@@ -19,8 +19,7 @@ afcfta-navigator-submission.zip
 # material and has no place in a public repo.
 videos/
 
-# Editor-local only. Currently holds a files.exclude block that tidies the
-# explorer for the demo video; delete the folder once recording is done.
+# Editor-local only.
 .vscode/
 
 
