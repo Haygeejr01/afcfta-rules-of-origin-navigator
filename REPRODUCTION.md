@@ -447,33 +447,42 @@ python -c "import json; [print(r['manifest_id'], '|', r['raw_response'].replace(
 
 ## 9. Timing notes (measured, not estimated)
 
-Measured on a Windows 11 machine running the 7B model on local hardware, across the six
+Measured on a Windows 11 machine running the 7B model on local hardware, across the eight
 committed trajectory logs plus the two evaluation runs. Yours will differ; the *relative*
 comparison between the two systems is what the evaluation is about.
+
+Every figure below is **machine time**: the sum of node durations excluding `HUMAN_REVIEW`,
+which measures how long the reviewer took to answer and is therefore not a property of the
+system. One log makes the distinction concrete — `M010-20260830-225012.json` records
+`HUMAN_REVIEW` at **617 s**, because that checkpoint was held open while the run was being
+narrated for the demo video. Its machine time is 224 s.
 
 | | Model calls | Measured |
 |---|---|---|
 | Baseline, per case | 1 | **37.8 s** avg over 10 cases |
 | **Graded workflow pipeline** (`EXTRACT` → `VERIFY`) | 2 | **97.7 s** avg over 10 cases — this is the figure in the README's results table |
-| Full run you **approve** (adds `GENERATE_REPORT`) | 3 | **158 s – 339 s** wall clock across the five approved trajectories |
-| Full run you **reject** | 2 | **85 s** (M010) |
+| Full run you **approve** (adds `GENERATE_REPORT`) | 3 | **158 s – 375 s** across the six approved trajectories |
+| Full run you **reject** | 2 | **85 s** on a quiet machine, **224 s** while screen-recording (the two M010 logs) |
 
 **Budget three to five minutes for an interactive run, not ninety seconds.** The 97.7 s
 figure is honest but it measures the *graded* pipeline, which stops at the human
 checkpoint. Adding the narrative call roughly doubles it.
 
-Per-node latency, min–max across the six trajectories:
+Per-node latency, min–max across the eight trajectories:
 
 | Node | Range | Notes |
 |---|---|---|
-| `EXTRACT` | **68–169 s** | Consistently the most expensive call: longest prompt, longest structured output |
-| `CLASSIFY_HS` | **14–82 s** | Short output, but the shortlist makes the prompt large |
+| `EXTRACT` | **68–189 s** | Consistently the most expensive call: longest prompt, longest structured output |
+| `CLASSIFY_HS` | **14–100 s** | Short output, but the shortlist makes the prompt large |
 | `GENERATE_REPORT` | **69–88 s** | Only runs on approve |
 | `LOOKUP_RULE`, `CALCULATE_RVC`, `VERIFY` | **0.0 s** | Pure Python. They appear as `0.0s` in the logs because they are single-digit milliseconds |
 
-**Same node, same machine, same model, 2.5× spread.** `CLASSIFY_HS` ran 14 s on one run
-and 82 s on another; `EXTRACT` 68 s and 169 s. That is memory pressure and model
-eviction on a laptop, not workload — nothing in the prompt changed. It is also why the
+**Same node, same machine, same model, 7× spread.** `CLASSIFY_HS` ran 14 s on one run
+and 100 s on another; `EXTRACT` 68 s and 189 s. That is memory pressure and model
+eviction on a laptop, not workload — nothing in the prompt changed. The two slowest runs
+are the two recorded for the demo video, with a screen recorder competing for the same
+machine, and they are committed at their real speed rather than re-run quietly to produce
+a flattering number. It is also why the
 one thing this project measured carelessly was latency: see CHANGELOG's "Two eval runs
 raced each other". **Do not run anything else against Ollama while timing.**
 
