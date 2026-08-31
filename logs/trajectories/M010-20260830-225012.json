@@ -1,0 +1,230 @@
+{
+  "manifest_id": "M010",
+  "raw_input": "KAROO SOLAR ASSEMBLY (PTY) LTD \u2014 Kimberley, South Africa\n\nProduct: monocrystalline silicon photovoltaic module, 450 W, glass-fronted, aluminium framed, with junction box. Assembled at our Kimberley plant.\n\nUSD per 100 modules:\nmonocrystalline PV cells, China ......... 8200\ntempered front glass, China ............. 1400\nanodised aluminium frame, South Africa .. 1600\njunction box with diodes, China ......... 400\nEVA encapsulant film, Vietnam ........... 600\npolymer backsheet, South Korea .......... 500\ntinned copper busbar ribbon, India ...... 300",
+  "trace": [
+    {
+      "node": "EXTRACT",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 138062.921699835,
+      "detail": {
+        "components_extracted": 7,
+        "components_rejected": [],
+        "prompt_tokens": 397,
+        "completion_tokens": 254
+      },
+      "timestamp": "2026-08-30T21:38:29+00:00"
+    },
+    {
+      "node": "CLASSIFY_HS",
+      "status": "ok",
+      "model": "qwen2.5-coder:7b",
+      "duration_ms": 85485.61559990048,
+      "detail": {
+        "proposed_by_model": "8544.42",
+        "accepted": "8544.42",
+        "overridden_because_not_in_dataset": null,
+        "self_reported_confidence": 1.0,
+        "prompt_tokens": 654,
+        "completion_tokens": 56
+      },
+      "timestamp": "2026-08-30T21:39:54+00:00"
+    },
+    {
+      "node": "LOOKUP_RULE",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.03709993325173855,
+      "detail": {
+        "hs_code": "8544.42",
+        "rvc_threshold": 55.0,
+        "reason": "Matched a rule in the controlled dataset."
+      },
+      "timestamp": "2026-08-30T21:39:54+00:00"
+    },
+    {
+      "node": "CALCULATE_RVC",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 3.8644999731332064,
+      "detail": {
+        "total_cost": 13000.0,
+        "african_sourced_cost": 1600.0,
+        "rvc_percent": 12.31,
+        "threshold": 55.0,
+        "margin_pp": -42.69,
+        "status": "FAIL",
+        "basis": "12.31% is below the 55.0% threshold.",
+        "unrecognized_origins": []
+      },
+      "timestamp": "2026-08-30T21:39:54+00:00"
+    },
+    {
+      "node": "VERIFY",
+      "status": "ok",
+      "model": null,
+      "duration_ms": 0.09449990466237068,
+      "detail": {
+        "errors": [],
+        "warnings": []
+      },
+      "timestamp": "2026-08-30T21:39:54+00:00"
+    },
+    {
+      "node": "HUMAN_REVIEW",
+      "status": "reject",
+      "model": null,
+      "duration_ms": 617160.7542999554,
+      "detail": {
+        "decision": "reject",
+        "notes": "proposed 8544.42 is insulated conductors; this a PV module",
+        "edited_hs_code": null,
+        "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M010.checkpoint.json",
+        "seconds_waiting_for_human": 617.2
+      },
+      "timestamp": "2026-08-30T21:50:12+00:00"
+    }
+  ],
+  "model_calls": 2,
+  "final_state": {
+    "manifest_id": "M010",
+    "raw_text": "KAROO SOLAR ASSEMBLY (PTY) LTD \u2014 Kimberley, South Africa\n\nProduct: monocrystalline silicon photovoltaic module, 450 W, glass-fronted, aluminium framed, with junction box. Assembled at our Kimberley plant.\n\nUSD per 100 modules:\nmonocrystalline PV cells, China ......... 8200\ntempered front glass, China ............. 1400\nanodised aluminium frame, South Africa .. 1600\njunction box with diodes, China ......... 400\nEVA encapsulant film, Vietnam ........... 600\npolymer backsheet, South Korea .......... 500\ntinned copper busbar ribbon, India ...... 300",
+    "product_description": "monocrystalline silicon photovoltaic module, 450 W, glass-fronted, aluminium framed, with junction box.",
+    "bill_of_materials": [
+      {
+        "component_name": "monocrystalline PV cells",
+        "origin_country": "China",
+        "cost_usd": 8200.0
+      },
+      {
+        "component_name": "tempered front glass",
+        "origin_country": "China",
+        "cost_usd": 1400.0
+      },
+      {
+        "component_name": "anodised aluminium frame",
+        "origin_country": "South Africa",
+        "cost_usd": 1600.0
+      },
+      {
+        "component_name": "junction box with diodes",
+        "origin_country": "China",
+        "cost_usd": 400.0
+      },
+      {
+        "component_name": "EVA encapsulant film",
+        "origin_country": "Vietnam",
+        "cost_usd": 600.0
+      },
+      {
+        "component_name": "polymer backsheet",
+        "origin_country": "South Korea",
+        "cost_usd": 500.0
+      },
+      {
+        "component_name": "tinned copper busbar ribbon",
+        "origin_country": "India",
+        "cost_usd": 300.0
+      }
+    ],
+    "hs_code": "8544.42",
+    "hs_classification_confidence": 1.0,
+    "hs_classification_rationale": "Monocrystalline silicon photovoltaic modules are electric conductors for a voltage not exceeding 1000 V.",
+    "rvc_threshold": 55.0,
+    "rule_description": "Other electric conductors, for a voltage not exceeding 1000 V, fitted with connectors",
+    "total_cost": 13000.0,
+    "african_sourced_cost": 1600.0,
+    "non_african_sourced_cost": 11400.0,
+    "calculated_rvc_percent": 12.31,
+    "unrecognized_origins": [],
+    "compliance_status": "FAIL",
+    "verification_errors": [],
+    "human_decision": "reject",
+    "human_notes": "proposed 8544.42 is insulated conductors; this a PV module",
+    "final_output": null,
+    "trace": [
+      {
+        "node": "EXTRACT",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 138062.921699835,
+        "detail": {
+          "components_extracted": 7,
+          "components_rejected": [],
+          "prompt_tokens": 397,
+          "completion_tokens": 254
+        },
+        "timestamp": "2026-08-30T21:38:29+00:00"
+      },
+      {
+        "node": "CLASSIFY_HS",
+        "status": "ok",
+        "model": "qwen2.5-coder:7b",
+        "duration_ms": 85485.61559990048,
+        "detail": {
+          "proposed_by_model": "8544.42",
+          "accepted": "8544.42",
+          "overridden_because_not_in_dataset": null,
+          "self_reported_confidence": 1.0,
+          "prompt_tokens": 654,
+          "completion_tokens": 56
+        },
+        "timestamp": "2026-08-30T21:39:54+00:00"
+      },
+      {
+        "node": "LOOKUP_RULE",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.03709993325173855,
+        "detail": {
+          "hs_code": "8544.42",
+          "rvc_threshold": 55.0,
+          "reason": "Matched a rule in the controlled dataset."
+        },
+        "timestamp": "2026-08-30T21:39:54+00:00"
+      },
+      {
+        "node": "CALCULATE_RVC",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 3.8644999731332064,
+        "detail": {
+          "total_cost": 13000.0,
+          "african_sourced_cost": 1600.0,
+          "rvc_percent": 12.31,
+          "threshold": 55.0,
+          "margin_pp": -42.69,
+          "status": "FAIL",
+          "basis": "12.31% is below the 55.0% threshold.",
+          "unrecognized_origins": []
+        },
+        "timestamp": "2026-08-30T21:39:54+00:00"
+      },
+      {
+        "node": "VERIFY",
+        "status": "ok",
+        "model": null,
+        "duration_ms": 0.09449990466237068,
+        "detail": {
+          "errors": [],
+          "warnings": []
+        },
+        "timestamp": "2026-08-30T21:39:54+00:00"
+      },
+      {
+        "node": "HUMAN_REVIEW",
+        "status": "reject",
+        "model": null,
+        "duration_ms": 617160.7542999554,
+        "detail": {
+          "decision": "reject",
+          "notes": "proposed 8544.42 is insulated conductors; this a PV module",
+          "edited_hs_code": null,
+          "checkpoint": "C:\\Users\\`Hp\\OneDrive\\Documents\\Micro1 - Hackerearth\\logs\\checkpoints\\M010.checkpoint.json",
+          "seconds_waiting_for_human": 617.2
+        },
+        "timestamp": "2026-08-30T21:50:12+00:00"
+      }
+    ]
+  }
+}
